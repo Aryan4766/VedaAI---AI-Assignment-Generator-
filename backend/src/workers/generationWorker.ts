@@ -1,7 +1,7 @@
 import { Worker } from "bullmq";
-import IORedis from "ioredis";
 import mongoose from "mongoose";
 import { env } from "../config/env";
+import { createRedisConnection } from "../lib/redis";
 import { Assignment } from "../models/Assignment";
 import { generateQuestionPaper } from "../services/aiService";
 import {
@@ -11,9 +11,7 @@ import {
 import { emitGenerationUpdate } from "../sockets";
 import { publishGenerationEvent } from "../utils/generationEvents";
 
-const connection = new IORedis(env.redisUrl, {
-  maxRetriesPerRequest: null,
-});
+const connection = createRedisConnection();
 
 async function processJob(data: GenerationJobData) {
   const { assignmentId } = data;

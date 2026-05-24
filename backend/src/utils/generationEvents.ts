@@ -1,5 +1,5 @@
 import IORedis from "ioredis";
-import { env } from "../config/env";
+import { createRedisConnection } from "../lib/redis";
 
 const CHANNEL = "generation:updates";
 
@@ -13,7 +13,7 @@ let publisher: IORedis | null = null;
 
 function getPublisher(): IORedis {
   if (!publisher) {
-    publisher = new IORedis(env.redisUrl, { maxRetriesPerRequest: null });
+    publisher = createRedisConnection();
   }
   return publisher;
 }
@@ -29,7 +29,7 @@ export async function publishGenerationEvent(
 export function subscribeToGenerationEvents(
   onEvent: (payload: GenerationEventPayload) => void,
 ): void {
-  const subscriber = new IORedis(env.redisUrl, { maxRetriesPerRequest: null });
+  const subscriber = createRedisConnection();
   subscriber.subscribe(CHANNEL);
   subscriber.on("message", (_channel, message) => {
     try {

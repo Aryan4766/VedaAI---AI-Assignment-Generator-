@@ -1,10 +1,7 @@
 import { Queue } from "bullmq";
-import IORedis from "ioredis";
-import { env } from "../config/env";
+import { createRedisConnection } from "../lib/redis";
 
-const connection = new IORedis(env.redisUrl, {
-  maxRetriesPerRequest: null,
-});
+const connection = createRedisConnection();
 
 export const GENERATION_QUEUE = "assignment-generation";
 
