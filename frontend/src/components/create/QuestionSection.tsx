@@ -55,8 +55,8 @@ export function QuestionSection({
             key={row.id}
             row={row}
             mobile
-            onUpdate={(patch) => onUpdate(row.id, patch)}
-            onRemove={() => onRemove(row.id)}
+            onUpdate={(patch) => row.id && onUpdate(row.id, patch)}
+            onRemove={() => row.id && onRemove(row.id)}
           />
         ))}
       </div>
