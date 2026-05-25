@@ -6,6 +6,19 @@ Teachers can create assignments, configure question structures, generate AI-powe
 
 ---
 
+##  Live Deployment
+
+| Service | Link |
+|---|---|
+| Frontend | https://veda-ai-ai-assignment-generator.vercel.app |
+| Backend API | https://vedaai-backend-cxvw.onrender.com/api/assignments |
+
+### Demo Flow
+Create Assignment → AI Generation → Real-time Processing → PDF Export
+
+
+---
+
 # Features
 
 * Figma-accurate responsive UI
